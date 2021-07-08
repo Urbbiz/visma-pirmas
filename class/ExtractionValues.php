@@ -10,7 +10,7 @@ class ExtractionValues {
     // reikia gautus duomenis isirasyti i masyva runtime metu.
     public static function getValues(){
         $values = [];
-        $file = new SplFileObject("inputfile.txt");
+        $file = new SplFileObject("data/inputfile.txt");
         while (!$file->eof()) {
             $values[] =  trim($file->fgets());
             // echo $file->fgets();
