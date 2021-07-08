@@ -7,4 +7,17 @@ echo "Enter Word here: ";
 
 $givenWord = trim(fgets(STDIN, 1024));
 
-Echo SyllableAlgorithm::syllableFunction();
+$startTime = microtime(true); // laiko pradzia
+
+echo "The word you entered is: $givenWord". "\n";
+
+
+$values = ExtractionValues::getValues(); // issitraukiam txt failo turini.
+
+echo "Word in syllables: ";
+echo   SyllableAlgorithm::syllableMaker() . "\n";
+
+$endTime = microtime(true); //laiko pabaiga
+$executionTime = round($endTime - $startTime, 4); // programos veikimo laikas suapvalintas iki 4 skaiciu po kableliu
+
+echo "Execution time: $executionTime seconds";

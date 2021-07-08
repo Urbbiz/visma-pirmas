@@ -2,8 +2,8 @@
 
 class SyllableAlgorithm {
 
-    public  static  function  syllableFunction() {
+    public  static  function  syllableMaker() {
 
-        echo "zodi pavercia skiemenimis";
+        echo "grazina isskiemenuota zodi";
     }
 }
