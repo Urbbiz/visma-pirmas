@@ -4,6 +4,9 @@ class SyllableAlgorithm {
 
     public  static  function  syllableMaker($givenWord, $values) {
 
+
+
+
         $givenWord = ".".$givenWord.".";  // uzdedam taskus
 
 // <--------perdarom i masiva be skaiciu-------->
@@ -19,19 +22,26 @@ class SyllableAlgorithm {
         foreach ($valuesNoNumbers as $key=> $value){  // einam per masyva be skaiciu
 // echo $key."-". $value ;
 // print_r($value);
+
             $found=false;
             do {                          // ieskom skiemens givenWorde
 // echo $key;
                 $offset = 0;
-                if ($found !== false) {    // jeigu randa atitikmeni
+                if ($found != false) {    // jeigu randa atitikmeni
                     $offset = $found + 1;    // found pozicija kur rado, nustatom offset, kad ieskotu nuo toliau, negu rado
                     $snippet = $values[$key];  // pasiimam is paduoto masyvo lygiai ta pati ka radom, tik su skaiciais.
 
                     $snippetIndex = 0;   // char indexas skiemenyje, kuri radom(mis3)
+
+
                     for($i= 0; $i < strlen($snippet); $i++ ){
 
                         $number = intval($snippet[$i]);  //tai yra pvz m raide ir bando , jeigu ne skaicius, grazins nuli, nes pas mus nera nulio.
+
+
                         if($number > 0 ){   // jeigu daugiau uz 0 , reiskia rado skaiciu (3)
+
+
 
                             $index = $snippetIndex + $found -1;  // inexas tai yra vieta po kurio irasinesim ta skaiciu , musu duotame zodyje.
                             if (!array_key_exists($index, $foundValues) || $foundValues[$index] < $number ){ // tikrinam ar jau buvo toks indexas tame masyve, jeigu buvo  tai irasom didesni, jeigu nebuvo, tai tiesiog ierasom nauja
@@ -40,15 +50,21 @@ class SyllableAlgorithm {
                         }else {
                             $snippetIndex ++;   // didins kai tik atras raide, o ne skaiciu
                         }
+
+
                     }
 
                     // echo "positionInWord: ". $found .", value: " . $values[$key] . "\n";
                 }
                 $found = stripos($givenWord, $value, $offset);  // ieskom value duotam zodyje , nuo vietos kuria nurodo offset.
 
-            }while($found !== false);   // sukam cikla tol, kol randam zodyje kelis skiemenu atitikmenis
+
+
+            }while($found != false);   // sukam cikla tol, kol randam zodyje kelis skiemenu atitikmenis
 
         }
+
+//        var_dump($foundValues);
 
         $finalResult = "";
         for ($i=0; $i < strlen($givenWord) ; $i++) {
@@ -58,7 +74,7 @@ class SyllableAlgorithm {
                 $finalResult .=  "-";   // jeigu egzistuoja ir nelyginis pakeiciam i -
 
 
-// echo $foundValues[$i];
+//                echo "foundValues: ".$foundValues[$i]. "\n";
             }
         }
         return trim($finalResult,".");

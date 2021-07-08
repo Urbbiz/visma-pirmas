@@ -12,7 +12,7 @@ class ExtractionValues {
         $values = [];
         $file = new SplFileObject("inputfile.txt");
         while (!$file->eof()) {
-            $values[] = $file->fgets();
+            $values[] =  trim($file->fgets());
             // echo $file->fgets();
             // echo "\n","\n";
         }
