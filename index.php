@@ -15,7 +15,9 @@ echo "The word you entered is: $givenWord". "\n";
 $values = ExtractionValues::getValues(); // issitraukiam txt failo turini.
 
 echo "Word in syllables: ";
-echo   SyllableAlgorithm::syllableMaker() . "\n";
+$syllableWord = SyllableAlgorithm::syllableMaker($givenWord, $values);
+
+echo   $syllableWord . "\n";
 
 $endTime = microtime(true); //laiko pabaiga
 $executionTime = round($endTime - $startTime, 4); // programos veikimo laikas suapvalintas iki 4 skaiciu po kableliu
