@@ -1,14 +1,14 @@
 <?php
-namespace Syllable;
-use Syllable;
+namespace Syllable\Service;
+use Syllable\Service;
 
-class SyllableAlgorithm {
+class SyllableAlgorithm  implements SyllableAlgorithmInterface {
 
     public function  syllableMaker($givenWord, $values) {
 
-        $givenWord =self::addDots($givenWord);// uzdedam taskus is priekio ir galo duotam zodziui
+        $givenWord =$this->addDots($givenWord);// uzdedam taskus is priekio ir galo duotam zodziui
 
-        $valuesNoNumbers=self::valueNoNumbers($values);  // perdaro masyva be skaiciu
+        $valuesNoNumbers=$this->valueNoNumbers($values);  // perdaro masyva be skaiciu
 
         $foundValues= [];
         foreach ($valuesNoNumbers as $key=> $value){  // einam per masyva be skaiciu
@@ -36,9 +36,7 @@ class SyllableAlgorithm {
                         }else {
                             $snippetIndex ++;   // didins kai tik atras raide, o ne skaiciu
                         }
-
                     }
-
                     // echo "positionInWord: ". $found .", value: " . $values[$key] . "\n";
                 }
                 $found = stripos($givenWord, $value, $offset);  // ieskom value duotam zodyje , nuo vietos kuria nurodo offset.
@@ -47,7 +45,7 @@ class SyllableAlgorithm {
         }
 
 
-        return $finalResult = self::syllableWord($givenWord, $foundValues);
+        return $finalResult = $this->syllableWord($givenWord, $foundValues);
     }
 
     // <--------perdarom i masiva be skaiciu-------->
@@ -79,8 +77,6 @@ class SyllableAlgorithm {
                 }
             }
             return trim($finalResult,".");
-
-
     }
 
 }

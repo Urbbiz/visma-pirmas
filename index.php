@@ -1,6 +1,6 @@
 <?php
 require  __DIR__.'/bootstrap.php';
-use  Syllable\Applic;
+use  Syllable\app\Application;
 
 
 $runApp = new Application();
