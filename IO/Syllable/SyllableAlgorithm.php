@@ -1,31 +1,20 @@
 <?php
+namespace Syllable;
+use Syllable;
 
 class SyllableAlgorithm {
 
-    public  static  function  syllableMaker($givenWord, $values) {
+    public function  syllableMaker($givenWord, $values) {
 
+        $givenWord =self::addDots($givenWord);// uzdedam taskus is priekio ir galo duotam zodziui
 
-
-
-        $givenWord = ".".$givenWord.".";  // uzdedam taskus
-
-// <--------perdarom i masiva be skaiciu-------->
-        $valuesNoNumbers= [];  // tokio pacio ilgio masyvas kaip ir values
-        foreach ($values as $value){
-            $valuesNoNumbers[] = str_replace(['1','2','3','4','5','6','7','8','9','0'], "",$value );
-        }
-
-// echo  $valuesNoNumbers[0];
-
+        $valuesNoNumbers=self::valueNoNumbers($values);  // perdaro masyva be skaiciu
 
         $foundValues= [];
         foreach ($valuesNoNumbers as $key=> $value){  // einam per masyva be skaiciu
-// echo $key."-". $value ;
-// print_r($value);
 
             $found=false;
             do {                          // ieskom skiemens givenWorde
-// echo $key;
                 $offset = 0;
                 if ($found != false) {    // jeigu randa atitikmeni
                     $offset = $found + 1;    // found pozicija kur rado, nustatom offset, kad ieskotu nuo toliau, negu rado
@@ -33,24 +22,20 @@ class SyllableAlgorithm {
 
                     $snippetIndex = 0;   // char indexas skiemenyje, kuri radom(mis3)
 
-
                     for($i= 0; $i < strlen($snippet); $i++ ){
 
                         $number = intval($snippet[$i]);  //tai yra pvz m raide ir bando , jeigu ne skaicius, grazins nuli, nes pas mus nera nulio.
 
-
                         if($number > 0 ){   // jeigu daugiau uz 0 , reiskia rado skaiciu (3)
 
-
-
                             $index = $snippetIndex + $found -1;  // inexas tai yra vieta po kurio irasinesim ta skaiciu , musu duotame zodyje.
+
                             if (!array_key_exists($index, $foundValues) || $foundValues[$index] < $number ){ // tikrinam ar jau buvo toks indexas tame masyve, jeigu buvo  tai irasom didesni, jeigu nebuvo, tai tiesiog ierasom nauja
                                 $foundValues[$index] = $number;
-                            }
+                                }
                         }else {
                             $snippetIndex ++;   // didins kai tik atras raide, o ne skaiciu
                         }
-
 
                     }
 
@@ -58,25 +43,44 @@ class SyllableAlgorithm {
                 }
                 $found = stripos($givenWord, $value, $offset);  // ieskom value duotam zodyje , nuo vietos kuria nurodo offset.
 
-
-
             }while($found != false);   // sukam cikla tol, kol randam zodyje kelis skiemenu atitikmenis
-
         }
 
-//        var_dump($foundValues);
 
-        $finalResult = "";
-        for ($i=0; $i < strlen($givenWord) ; $i++) {
-            $finalResult .=  $givenWord[$i];  // pridedam raide
-
-            if(array_key_exists($i,$foundValues ) && $foundValues[$i]% 2 ==1 ){
-                $finalResult .=  "-";   // jeigu egzistuoja ir nelyginis pakeiciam i -
-
-
-//                echo "foundValues: ".$foundValues[$i]. "\n";
-            }
-        }
-        return trim($finalResult,".");
+        return $finalResult = self::syllableWord($givenWord, $foundValues);
     }
+
+    // <--------perdarom i masiva be skaiciu-------->
+   private function  valueNoNumbers($values) {
+
+        $valuesNoNumbers= [];  // tokio pacio ilgio masyvas kaip ir values
+        foreach ($values as $value){
+            $valuesNoNumbers[] = str_replace(['1','2','3','4','5','6','7','8','9','0'], "",$value );
+        }
+        return $valuesNoNumbers;
+    }
+
+
+    // <--------prideda taskus prie duoto zodzio pradzioj ir gale-------->
+    protected function addDots($givenWord){
+
+        $givenWord = ".".$givenWord.".";  // uzdedam taskus
+        return $givenWord;
+    }
+
+    // <--------pakeicia nelyginius skaicius i -   ir isveda galutini atsakyma-------->
+    public function syllableWord($givenWord, $foundValues){
+            $finalResult = "";
+            for ($i=0; $i < strlen($givenWord) ; $i++) {
+                $finalResult .=  $givenWord[$i];  // pridedam raide
+
+                if(array_key_exists($i,$foundValues ) && $foundValues[$i]% 2 ==1 ){
+                    $finalResult .=  "-";   // jeigu egzistuoja ir nelyginis pakeiciam i -
+                }
+            }
+            return trim($finalResult,".");
+
+
+    }
+
 }
