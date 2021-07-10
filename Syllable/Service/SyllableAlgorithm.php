@@ -45,29 +45,21 @@ class SyllableAlgorithm  implements SyllableAlgorithmInterface {
         }
 
 
-        return $finalResult = $this->syllableWord($givenWord, $foundValues);
+        return $finalResult = $this->numbersToDash($givenWord, $foundValues);  //<--- keicia skaiciu i minusa
     }
 
-    // <--------perdarom i masiva be skaiciu-------->
-   private function  valueNoNumbers($values) {
+        // <--------perdarom i masiva be skaiciu-------->
+       private function  valueNoNumbers($values) {
 
-        $valuesNoNumbers= [];  // tokio pacio ilgio masyvas kaip ir values
-        foreach ($values as $value){
-            $valuesNoNumbers[] = str_replace(['1','2','3','4','5','6','7','8','9','0'], "",$value );
+            $valuesNoNumbers= [];  // tokio pacio ilgio masyvas kaip ir values
+            foreach ($values as $value){
+                $valuesNoNumbers[] = str_replace(['1','2','3','4','5','6','7','8','9','0'], "",$value );
+            }
+            return $valuesNoNumbers;
         }
-        return $valuesNoNumbers;
-    }
 
-
-    // <--------prideda taskus prie duoto zodzio pradzioj ir gale-------->
-    protected function addDots($givenWord){
-
-        $givenWord = ".".$givenWord.".";  // uzdedam taskus
-        return $givenWord;
-    }
-
-    // <--------pakeicia nelyginius skaicius i -   ir isveda galutini atsakyma-------->
-    public function syllableWord($givenWord, $foundValues){
+        // <--------pakeicia nelyginius skaicius i -   ir isveda galutini atsakyma-------->
+        private function numbersToDash($givenWord, $foundValues){
             $finalResult = "";
             for ($i=0; $i < strlen($givenWord) ; $i++) {
                 $finalResult .=  $givenWord[$i];  // pridedam raide
@@ -77,6 +69,15 @@ class SyllableAlgorithm  implements SyllableAlgorithmInterface {
                 }
             }
             return trim($finalResult,".");
-    }
+        }
 
-}
+        // <--------prideda taskus prie duoto zodzio pradzioj ir gale-------->
+        protected function addDots($givenWord){
+
+            $givenWord = ".".$givenWord.".";  // uzdedam taskus
+            return $givenWord;
+        }
+
+
+
+    }

@@ -17,10 +17,10 @@ define('DIR', __DIR__ . '/');   //constants case sensitive
 //}
 
 //
-require DIR . 'Syllable/app/Application.php';
+require DIR . 'Syllable/App/Application.php';
 require DIR . 'Syllable/IO/ExtractionValues.php';
-require DIR . 'Syllable/service/SyllableAlgorithmInterface.php';
-require DIR . 'Syllable/service/SyllableAlgorithm.php';
+require DIR . 'Syllable/Service/SyllableAlgorithmInterface.php';
+require DIR . 'Syllable/Service/SyllableAlgorithm.php';
 
 
 //spl_autoload_register(function($className){
