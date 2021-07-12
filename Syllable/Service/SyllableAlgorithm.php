@@ -1,24 +1,20 @@
 <?php
+
 namespace Syllable\Service;
+
 use Syllable\Service;
-use Syllable\IO\ExtractionValues;
 use Syllable\IO\PatternResult;
 
-
-
-
-class SyllableAlgorithm implements SyllableAlgorithmInterface {
-
-
-    function  syllable(string $givenWord, PatternResult $patternResult): SyllableResult{
-
+class SyllableAlgorithm implements SyllableAlgorithmInterface
+{
+    function  syllable(string $givenWord, PatternResult $patternResult): SyllableResult
+    {
         $givenWord =$this->addDots($givenWord);// uzdedam taskus is priekio ir galo duotam zodziui
 
         $syllableResult = new SyllableResult();
 
         $foundValues= [];
         foreach ($patternResult->PatternsNoNumbers as $key=> $value){  // einam per masyva be skaiciu
-
             $addedResult = false;
             $found=false;
             do {                          // ieskom skiemens givenWorde
@@ -35,15 +31,10 @@ class SyllableAlgorithm implements SyllableAlgorithmInterface {
 
                     $snippetIndex = 0;   // char indexas skiemenyje, kuri radom(mis3)
 
-
                     for($i= 0; $i < strlen($snippet); $i++ ){
-
                         $number = intval($snippet[$i]);  //tai yra pvz m raide ir bando , jeigu ne skaicius, grazins nuli, nes pas mus nera nulio.
-
                         if($number > 0 ){   // jeigu daugiau uz 0 , reiskia rado skaiciu (3)
-
                             $index = $snippetIndex + $found -1;  // inexas tai yra vieta po kurio irasinesim ta skaiciu , musu duotame zodyje.
-
                             if (!array_key_exists($index, $foundValues) || $foundValues[$index] < $number ){ // tikrinam ar jau buvo toks indexas tame masyve, jeigu buvo  tai irasom didesni, jeigu nebuvo, tai tiesiog ierasom nauja
                                 $foundValues[$index] = $number;
                             }
@@ -66,11 +57,11 @@ class SyllableAlgorithm implements SyllableAlgorithmInterface {
 
 
     // <--------pakeicia nelyginius skaicius i -   ir isveda galutini atsakyma-------->
-    private function insertNumbers($givenWord, $foundValues){
+    private function insertNumbers($givenWord, $foundValues)
+    {
         $finalResult = "";
         for ($i=0; $i < strlen($givenWord) ; $i++) {
             $finalResult .=  $givenWord[$i];  // pridedam raide
-
             if(array_key_exists($i,$foundValues)) {
                 $finalResult .=  $foundValues[$i];   // pridedam skaiciu
             }
@@ -79,26 +70,25 @@ class SyllableAlgorithm implements SyllableAlgorithmInterface {
     }
 
 
-    private function numbersToDash($givenWord, $foundValues){
+    private function numbersToDash($givenWord, $foundValues)
+    {
         $finalResult = "";
         for ($i=0; $i < strlen($givenWord) ; $i++) {
             $finalResult .=  $givenWord[$i];  // pridedam raide
-
             if(array_key_exists($i,$foundValues ) && $foundValues[$i]% 2 ==1 ){
                 $finalResult .=  "-";   // jeigu egzistuoja ir nelyginis pakeiciam i -
             }
         }
+
         return trim($finalResult,".");
     }
 
 
     // <--------prideda taskus prie duoto zodzio pradzioj ir gale-------->
-    protected function addDots($givenWord){
-
+    protected function addDots($givenWord)
+    {
         $givenWord = ".".$givenWord.".";  // uzdedam taskus
+
         return $givenWord;
     }
-
-
-
 }

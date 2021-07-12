@@ -1,5 +1,7 @@
 <?php
+
 namespace Syllable\App;
+
 use Syllable\App;
 use Syllable\IO\PatternResult;
 use Syllable\Service\SyllableAlgorithm;
@@ -10,8 +12,8 @@ use Syllable\IO\Input\UserInput;
 
 class Application
 {
-    public function runApp (){
-
+    public function runApp ():void
+    {
 
         $userInput = new UserInput;
         $givenWord = $userInput->getInputWord();  // paduoda ivesta zodi
@@ -27,14 +29,9 @@ class Application
         echo  "Syllable result: ". $syllableResult->dashResult . "\n";   // parodo isskiemenuota zodi.
 
 //        var_dump($syllableResult);
-
-
         $endTime = microtime(true); //laiko pabaiga
         $executionTime = round($endTime - $startTime, 4); // programos veikimo laikas suapvalintas iki 4 skaiciu po kablelio
         echo "Execution time: $executionTime seconds". "\n";
-
-
-
 
     }
 

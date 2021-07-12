@@ -1,6 +1,7 @@
 <?php
 
 namespace Syllable\Service;
+
 use  Syllable\Service;
 use Syllable\IO\PatternResult;
 
