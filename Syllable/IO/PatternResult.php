@@ -11,6 +11,7 @@ class PatternResult {
     {
         $this->patterns[]= $pattern;
     }
+
     function getPatterns(): array
     {
         return $this->patterns;

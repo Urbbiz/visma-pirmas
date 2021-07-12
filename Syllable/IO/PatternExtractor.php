@@ -5,11 +5,11 @@ use Syllable\IO;
 // use Syllable\IO\Pattern;
 
 
-class PatternExtractor implements PatternExtractorInterface {
-
+class PatternExtractor implements PatternExtractorInterface
+{
     // isspausdina values is txt filo
-
-    public  function getPatterns($filePath): PatternResult{
+    public  function getPatterns($filePath): PatternResult
+    {
         $result = new PatternResult();
         $file = new \SplFileObject($filePath);
         while (!$file->eof()) {
@@ -17,9 +17,7 @@ class PatternExtractor implements PatternExtractorInterface {
             $pattern = new Pattern($value);
 
             $result->addPattern($pattern);
-
         }
-
         return $result;
     }
 

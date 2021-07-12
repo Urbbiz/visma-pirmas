@@ -9,8 +9,8 @@ use Syllable\IO\Input\UserInput;
 
 class Application
 {
-    public function runApp (){
-
+    public function runApp ()
+    {
 
         $userInput = new UserInput;
         $givenWord = $userInput->getInputWord();  // paduoda ivesta zodi
@@ -33,7 +33,6 @@ class Application
         $endTime = microtime(true); //laiko pabaiga
         $executionTime = round($endTime - $startTime, 4); // programos veikimo laikas suapvalintas iki 4 skaiciu po kablelio
         echo "Execution time: $executionTime seconds";
-
     }
 
     // public function getInputWord(){
