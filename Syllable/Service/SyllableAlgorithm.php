@@ -3,6 +3,7 @@
 namespace Syllable\Service;
 
 use Syllable\Service;
+use Syllable\IO\ExtractionValues;
 use Syllable\IO\PatternResult;
 
 class SyllableAlgorithm implements SyllableAlgorithmInterface
@@ -14,7 +15,7 @@ class SyllableAlgorithm implements SyllableAlgorithmInterface
         $syllableResult = new SyllableResult();
 
         $foundValues= [];
-        foreach ($patternResult->PatternsNoNumbers as $key=> $value){  // einam per masyva be skaiciu
+        foreach ($patternResult->getPatterns()as $pattern){  // einam per masyva be skaiciu
             $addedResult = false;
             $found=false;
             do {                          // ieskom skiemens givenWorde
@@ -22,7 +23,7 @@ class SyllableAlgorithm implements SyllableAlgorithmInterface
                 if ($found != false) {    // jeigu randa atitikmeni
 
                     $offset = $found + 1;    // found pozicija kur rado, nustatom offset, kad ieskotu nuo toliau, negu rado
-                    $snippet = $patternResult->RawPatterns[$key];  // pasiimam is paduoto masyvo lygiai ta pati ka radom, tik su skaiciais.
+                    $snippet = $pattern->__toString();  // pasiimam is paduoto masyvo lygiai ta pati ka radom, tik su skaiciais.
 
                     if($addedResult == false){   // <---apsisaugojam nuo pasikartojanciu patternu.
                         $syllableResult->matchedPatterns[]= $snippet;
@@ -44,7 +45,7 @@ class SyllableAlgorithm implements SyllableAlgorithmInterface
                     }
                     // echo "positionInWord: ". $found .", value: " . $patternResult->RawPatterns[$key] . "\n";
                 }
-                $found = stripos($givenWord, $value, $offset);  // ieskom value duotam zodyje , nuo vietos kuria nurodo offset.
+                $found = stripos($givenWord, $pattern->getPatternWithoutNumbers(), $offset);  // ieskom value duotam zodyje , nuo vietos kuria nurodo offset.
 
             }while($found != false);   // sukam cikla tol, kol randam zodyje kelis skiemenu atitikmenis
         }
