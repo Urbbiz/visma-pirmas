@@ -15,12 +15,12 @@ define('DIR', __DIR__ . '/');   //constants case sensitive
 //    include_once $fullpath;
 //
 //}
-
 require DIR . 'Syllable/App/Application.php';
 require DIR . 'Syllable/IO/PatternExtractorInterface.php';
 require DIR . 'Syllable/IO/PatternResult.php';
 require DIR . 'Syllable/IO/PatternExtractor.php';
 require DIR . 'Syllable/IO/Input/UserInput.php';
+require DIR . 'Syllable/IO/Pattern.php';
 require DIR . 'Syllable/Service/SyllableAlgorithmInterface.php';
 require DIR . 'Syllable/Service/SyllableAlgorithm.php';
 require DIR . 'Syllable/Service/SyllableResult.php';

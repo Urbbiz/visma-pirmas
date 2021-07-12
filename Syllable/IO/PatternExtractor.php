@@ -2,21 +2,22 @@
 namespace Syllable\IO;
 
 use Syllable\IO;
+// use Syllable\IO\Pattern;
 
 
-class PatternExtractor implements PatternExtractorInterface
-{
+class PatternExtractor implements PatternExtractorInterface {
+
     // isspausdina values is txt filo
-    public  function getPatterns($filePath): PatternResult
-    {
+
+    public  function getPatterns($filePath): PatternResult{
         $result = new PatternResult();
-
         $file = new \SplFileObject($filePath);
-
         while (!$file->eof()) {
             $value = trim($file->fgets());
-            $result->RawPatterns[] =  $value;   //<--- uzpildom RawPatterns masyva
-            $result->PatternsNoNumbers[] = str_replace(['1','2','3','4','5','6','7','8','9','0'], "",$value ); //   <--------perdarom i masiva be skaiciu
+            $pattern = new Pattern($value);
+
+            $result->addPattern($pattern);
+
         }
 
         return $result;

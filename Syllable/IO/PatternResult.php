@@ -1,12 +1,19 @@
 <?php
-
 namespace Syllable\IO;
-
 use  Syllable\IO;
 
-class PatternResult // <---grazins results objekto pavidale
-{
-    public array $RawPatterns;    // neapdorotas pattern property.
+class PatternResult {
 
-    public array $PatternsNoNumbers;  // pattern be skaiciu property.
+    private array $patterns;
+
+
+    function addPattern(Pattern $pattern): void
+    {
+        $this->patterns[]= $pattern;
+    }
+    function getPatterns(): array
+    {
+        return $this->patterns;
+    }
 }
+
