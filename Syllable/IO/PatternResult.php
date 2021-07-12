@@ -2,10 +2,10 @@
 namespace Syllable\IO;
 use  Syllable\IO;
 
-class PatternResult {
+class PatternResult {   // <---grazins results objekto pavidale
 
-    public array $RawPatterns;
-    public array $PatternsNoNumbers;
+    public array $RawPatterns;    // neapdorotas pattern property.
+    public array $PatternsNoNumbers;  // pattern be skaiciu property.
 
 
 }

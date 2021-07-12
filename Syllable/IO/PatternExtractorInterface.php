@@ -4,7 +4,7 @@ use  Syllable\IO;
 
 interface PatternExtractorInterface
 {
-    public function  getPatterns($filePath) : PatternResult;  // grazina PatternResult
+    public function  getPatterns($filePath) : PatternResult;  // grazina PatternResult klases objekta
 
 
 }

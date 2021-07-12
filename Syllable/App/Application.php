@@ -18,14 +18,8 @@ class Application
 
         $startTime = microtime(true); // laiko pradzia
 
-
-
-
         $patternExtractor = new PatternExtractor();
-
-        $patternsResult = $patternExtractor->getPatterns(DIR."data/inputfile.txt"); // issitraukiam txt failo turini.
-
-
+        $patternsResult = $patternExtractor->getPatterns(DIR."data/inputfile.txt"); // paduodam txt failo turini. toliau jis bus vadinamas kaip $filePath.
 
         $SyllableAlgorithm = new SyllableAlgorithm();
         $syllableResult=$SyllableAlgorithm->syllable($givenWord, $patternsResult);

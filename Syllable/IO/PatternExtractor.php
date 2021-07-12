@@ -12,8 +12,8 @@ class PatternExtractor implements PatternExtractorInterface {
         $file = new \SplFileObject($filePath);
         while (!$file->eof()) {
             $value = trim($file->fgets());
-            $result->RawPatterns[] =  $value;
-            $result->PatternsNoNumbers[] = str_replace(['1','2','3','4','5','6','7','8','9','0'], "",$value );
+            $result->RawPatterns[] =  $value;   //<--- uzpildom RawPatterns masyva
+            $result->PatternsNoNumbers[] = str_replace(['1','2','3','4','5','6','7','8','9','0'], "",$value ); //   <--------perdarom i masiva be skaiciu
 
 
         }
