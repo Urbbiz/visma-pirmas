@@ -1,48 +1,57 @@
 <?php
 namespace Syllable\App;
 use Syllable\App;
+use Syllable\IO\PatternResult;
 use Syllable\Service\SyllableAlgorithm;
-use Syllable\IO\ExtractionValues;
+use Syllable\Service\SyllableResult;
+use Syllable\IO\PatternExtractor;
+use Syllable\IO\Input\UserInput;
 
 
 class Application
 {
-public function runApp (){
+    public function runApp (){
+
+
+        $userInput = new UserInput;
+        $givenWord = $userInput->getInputWord();  // paduoda ivesta zodi
+
+        $startTime = microtime(true); // laiko pradzia
 
 
 
 
-    $givenWord = $this->getInputWord();
+        $patternExtractor = new PatternExtractor();
 
-    $startTime = microtime(true); // laiko pradzia
-
-
-    $extractionValues = new ExtractionValues();
-    $values = $extractionValues->getValues(); // issitraukiam txt failo turini.
-
-    echo "Word in syllables: ";
-
-    $SyllableAlgorithm = new SyllableAlgorithm();
-    $syllableWord=$SyllableAlgorithm->syllableMaker($givenWord, $values);
+        $patternsResult = $patternExtractor->getPatterns(DIR."data/inputfile.txt"); // issitraukiam txt failo turini.
 
 
-    echo   $syllableWord . "\n";
 
-    $endTime = microtime(true); //laiko pabaiga
-    $executionTime = round($endTime - $startTime, 4); // programos veikimo laikas suapvalintas iki 4 skaiciu po kablelio
+        $SyllableAlgorithm = new SyllableAlgorithm();
+        $syllableResult=$SyllableAlgorithm->syllable($givenWord, $patternsResult);
 
-    echo "Execution time: $executionTime seconds";
+        echo  "Syllable result: ". $syllableResult->dashResult . "\n";   // parodo isskiemenuota zodi.
+
+//        var_dump($syllableResult);
+
+
+        $endTime = microtime(true); //laiko pabaiga
+        $executionTime = round($endTime - $startTime, 4); // programos veikimo laikas suapvalintas iki 4 skaiciu po kablelio
+        echo "Execution time: $executionTime seconds". "\n";
+
+
+
 
     }
 
-    public function getInputWord(){
+    // public function getInputWord(){
 
-    echo "Please Enter the word you want to syllable", "\n";
-        echo "Enter Word here: ";
+    // echo "Please Enter the word you want to syllable", "\n";
+    //     echo "Enter Word here: ";
 
-        $givenWord = trim(fgets(STDIN, 1024));
+    //     $givenWord = trim(fgets(STDIN, 1024));
 
-        echo "The word you entered is: $givenWord". "\n";
-    return $givenWord;
-    }
+    //     echo "The word you entered is: $givenWord". "\n";
+    // return $givenWord;
+    // }
 }
