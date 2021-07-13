@@ -24,6 +24,9 @@ require DIR . 'Syllable/IO/Pattern.php';
 require DIR . 'Syllable/Service/SyllableAlgorithmInterface.php';
 require DIR . 'Syllable/Service/SyllableAlgorithm.php';
 require DIR . 'Syllable/Service/SyllableResult.php';
+require DIR . 'Psr/Log/LoggerInterface.php';
+require DIR . 'Psr/Log/Logger.php';
+require DIR. 'Psr/Log/LogLevel.php';
 
 
 //spl_autoload_register(function($className){

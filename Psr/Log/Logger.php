@@ -4,10 +4,14 @@
 namespace Psr\Log;
 
 use Psr\Log;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 
 class Logger implements LoggerInterface
 {
+    private $loggers;
+
     public function emergency($message, array $context = array()):void
     {
 
@@ -17,14 +21,20 @@ class Logger implements LoggerInterface
          * Example: Entire website down, database unavailable, etc. This should
          * trigger the SMS alerts and wake you up.
          *
-         * @param string $message
+         * @param string $message = "Total crapp";
          * @param array $context
          * @return void
          */
+       foreach ($this->loggers as $logger) {
+           $logger->emergency($message, $context);
+       }
     }
 
     public function alert($message, array $context = array()):void
     {
+
+        $this->log(LogLevel::ALERT, $message, $context);
+
         /**
          * Critical conditions.
          *
@@ -38,6 +48,7 @@ class Logger implements LoggerInterface
 
     public function critical($message, array $context = array()):void
     {
+        $this->log(LogLevel::CRITICAL, $message, $context);
 
         /**
          * Runtime errors that do not require immediate action but should typically
@@ -51,6 +62,7 @@ class Logger implements LoggerInterface
 
     public function error($message, array $context = array()):void
     {
+        $this->log(LogLevel::ERROR, $message, $context);
         /**
          * Exceptional occurrences that are not errors.
          *
@@ -65,6 +77,7 @@ class Logger implements LoggerInterface
 
     public function warning($message, array $context = array()):void
     {
+        $this->log(LogLevel::WARNING, $message, $context);
         /**
          * Normal but significant events.
          *
@@ -75,6 +88,8 @@ class Logger implements LoggerInterface
     }
     public function notice($message, array $context = array()):void
     {
+
+        $this->log(LogLevel::NOTICE, $message, $context);
         /**
          * Interesting events.
          *
@@ -88,6 +103,7 @@ class Logger implements LoggerInterface
 
     public function info($message, array $context = array()):void
     {
+        $this->log(LogLevel::INFO, $message, $context);
         /**
          * Detailed debug information.
          *
@@ -99,6 +115,7 @@ class Logger implements LoggerInterface
 
     public function debug($message, array $context = array()):void
     {
+        $this->log(LogLevel::DEBUG, $message, $context);
         /**
          * Logs with an arbitrary level.
          *
@@ -108,15 +125,16 @@ class Logger implements LoggerInterface
          * @return void
          */
 
-        $message = "User {username} created";
-        $context = array('username' => 'bolivar');
-        echo interpolate($message, $context);
 
     }
 
     public function log($level, $message, array $context = array())
     {
 
+        $d=mktime();
+//
+
+        file_put_contents(DIR."/Var/Log/logFile.txt",$this->interpolate($message.date("Y-m-d h:i:sa", $d), $context), FILE_APPEND | LOCK_EX);
 
     }
 
@@ -134,7 +152,7 @@ class Logger implements LoggerInterface
             }
         }
 
-        var_dump(interpolate());
+
 
         // interpolate replacement values into the message and return
         return strtr($message, $replace);

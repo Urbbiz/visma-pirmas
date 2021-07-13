@@ -9,22 +9,22 @@ class Pattern
 {
 
     function __construct($value) {
-        $this->RawPattern = $value;
-        $this->PatternNoNumbers = str_replace(['1','2','3','4','5','6','7','8','9','0'], "",$value );
+        $this->rawPattern = $value;
+        $this->patternNoNumbers = str_replace(['1','2','3','4','5','6','7','8','9','0'], "",$value );
     }
-    private string $RawPattern;
-    private string $PatternNoNumbers;
+    private string $rawPattern;
+    private string $patternNoNumbers;
 
 
     function  __toString(): string {
-        return $this->RawPattern;
+        return $this->rawPattern;
 
     }
 
 
     function getPatternWithoutNumbers():string
     {
-        return $this->PatternNoNumbers;
+        return $this->patternNoNumbers;
     }
 }
 

@@ -1,5 +1,7 @@
 <?php
 namespace Syllable\App;
+
+use Psr\Log\Logger;
 use Syllable\App;
 use Syllable\Service\SyllableAlgorithm;
 use Syllable\Service\SyllableResult;
@@ -7,10 +9,18 @@ use Syllable\IO\PatternExtractor;
 use Syllable\IO\Input\UserInput;
 
 
+
 class Application
 {
     public function runApp ()
     {
+
+//        $d=mktime();
+//        echo "Created date is " . date("Y-m-d h:i:sa", $d);
+        $logger = new Logger();
+//        $logger->log(""," test message time of message:".date("Y-m-d h:i:sa", $d)."\n");
+
+
 
         $userInput = new UserInput;
         $givenWord = $userInput->getInputWord();  // paduoda ivesta zodi
@@ -33,6 +43,8 @@ class Application
         $endTime = microtime(true); //laiko pabaiga
         $executionTime = round($endTime - $startTime, 4); // programos veikimo laikas suapvalintas iki 4 skaiciu po kablelio
         echo "Execution time: $executionTime seconds";
+
+        $logger->debug( "\n"."Syllable method took{$executionTime} seconds.");
     }
 
     // public function getInputWord(){
