@@ -1,8 +1,8 @@
 <?php
 
-namespace Syllable\IO;
+namespace Syllable\PatternModel;
 
-use Syllable\IO;
+use Syllable\PatternModel;
 
 
 class Pattern

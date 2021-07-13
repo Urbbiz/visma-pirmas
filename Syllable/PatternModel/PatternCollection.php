@@ -1,8 +1,8 @@
 <?php
-namespace Syllable\IO;
-use  Syllable\IO;
+namespace Syllable\PatternModel;
+use  Syllable\PatternModel;
 
-class PatternResult {
+class PatternCollection {
 
     private array $patterns;
 

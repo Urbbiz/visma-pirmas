@@ -130,12 +130,11 @@ class Logger implements LoggerInterface
 
     public function log($level, $message, array $context = array())
     {
-
         $d=mktime();
-//
+        $time = "Time: ".date("Y-m-d h:i:sa", $d);
+        $level = " Level:".$level." ";
 
-        file_put_contents(DIR."/Var/Log/logFile.txt",$this->interpolate($message.date("Y-m-d h:i:sa", $d), $context), FILE_APPEND | LOCK_EX);
-
+        file_put_contents(DIR."/Var/Log/logFile.txt",$this->interpolate($time.$level.$message."\n", $context), FILE_APPEND | LOCK_EX);
     }
 
     /**
@@ -151,9 +150,6 @@ class Logger implements LoggerInterface
                 $replace['{' . $key . '}'] = $val;
             }
         }
-
-
-
         // interpolate replacement values into the message and return
         return strtr($message, $replace);
     }

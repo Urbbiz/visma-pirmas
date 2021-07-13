@@ -1,8 +1,8 @@
 <?php
 
-namespace Syllable\IO\Input;
+namespace Syllable\IO;
 
-use Syllable\IO\Input;
+use Syllable\IO;
 
 
 class UserInput {

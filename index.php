@@ -1,8 +1,8 @@
 <?php
 
-require  __DIR__.'/bootstrap.php';
+require __DIR__.'/bootstrap.php';
 
-use  Syllable\app\Application;
+use  Syllable\App\Application;
 
 
 $runApp = new Application();

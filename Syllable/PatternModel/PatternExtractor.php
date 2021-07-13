@@ -1,16 +1,16 @@
 <?php
-namespace Syllable\IO;
+namespace Syllable\PatternModel;
 
-use Syllable\IO;
-// use Syllable\IO\Pattern;
+use Syllable\PatternModel;
+
 
 
 class PatternExtractor implements PatternExtractorInterface
 {
     // isspausdina values is txt filo
-    public  function getPatterns($filePath): PatternResult
+    public  function getPatterns($filePath): PatternCollection
     {
-        $result = new PatternResult();
+        $result = new PatternCollection();
         $file = new \SplFileObject($filePath);
         while (!$file->eof()) {
             $value = trim($file->fgets());

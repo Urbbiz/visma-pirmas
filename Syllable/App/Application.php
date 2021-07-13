@@ -5,8 +5,8 @@ use Psr\Log\Logger;
 use Syllable\App;
 use Syllable\Service\SyllableAlgorithm;
 use Syllable\Service\SyllableResult;
-use Syllable\IO\PatternExtractor;
-use Syllable\IO\Input\UserInput;
+use Syllable\PatternModel\PatternExtractor;
+use Syllable\IO\UserInput;
 
 
 
@@ -44,7 +44,7 @@ class Application
         $executionTime = round($endTime - $startTime, 4); // programos veikimo laikas suapvalintas iki 4 skaiciu po kablelio
         echo "Execution time: $executionTime seconds";
 
-        $logger->debug( "\n"."Syllable method took{$executionTime} seconds.");
+        $logger->info( "Syllable method took{$executionTime} seconds, syllabed word; {$givenWord}.");
     }
 
     // public function getInputWord(){

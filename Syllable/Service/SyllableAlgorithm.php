@@ -4,11 +4,11 @@ namespace Syllable\Service;
 
 use Syllable\Service;
 use Syllable\IO\ExtractionValues;
-use Syllable\IO\PatternResult;
+use Syllable\PatternModel\PatternCollection;
 
 class SyllableAlgorithm implements SyllableAlgorithmInterface
 {
-    function  syllable(string $givenWord, PatternResult $patternResult): SyllableResult
+    function  syllable(string $givenWord, PatternCollection $patternResult): SyllableResult
     {
         $givenWord =$this->addDots($givenWord);// uzdedam taskus is priekio ir galo duotam zodziui
 
