@@ -6,6 +6,7 @@ use Syllable\App;
 use Syllable\Service\SyllableAlgorithm;
 use Syllable\Service\SyllableResult;
 use Syllable\PatternModel\PatternExtractor;
+use Syllable\PatternModel\PatternCollection;
 use Syllable\IO\UserInput;
 
 
@@ -15,14 +16,39 @@ class Application
     public function runApp ()
     {
 
+        
+        $userInput = new UserInput;
+         $SyllableAlgorithm = new SyllableAlgorithm();
+         
+        
+        echo "if you want to syllable SENTENCE, press 1, else you will directed to WORD syllable"."\n";
+        $input = trim(fgets(STDIN, 1024));
+
+        if($input == 1){
+            Echo "You chose to syllable SENTENCE". "\n";
+           
+            $givenSentence = $userInput->getInputSentence();  // paduoda ivesta zodi
+            $sentenceToWordArray = $userInput->getSentenceWordsInArray($givenSentence);
+           
+            $patternExtractor = new PatternExtractor();
+        $patternsResult = $patternExtractor->getPatterns(DIR."data/inputfile.txt"); // issitraukiam txt failo turini.
+        $sylableSentence='';
+            foreach ($sentenceToWordArray as $word){
+                $syllableWord=$SyllableAlgorithm->syllable($word, $patternsResult);
+                $sylableSentence.= $syllableWord->dashResult;
+                echo $syllableWord->dashResult." ";
+            }
+            exit(0);
+        }
+
 //        $d=mktime();
 //        echo "Created date is " . date("Y-m-d h:i:sa", $d);
-        $logger = new Logger();
+            $logger = new Logger();
 //        $logger->log(""," test message time of message:".date("Y-m-d h:i:sa", $d)."\n");
+            
 
 
-
-        $userInput = new UserInput;
+        // $userInput = new UserInput;
         $givenWord = $userInput->getInputWord();  // paduoda ivesta zodi
 
         $startTime = microtime(true); // laiko pradzia
@@ -32,7 +58,7 @@ class Application
 
 
 
-        $SyllableAlgorithm = new SyllableAlgorithm();
+        // $SyllableAlgorithm = new SyllableAlgorithm();
         $syllableResult=$SyllableAlgorithm->syllable($givenWord, $patternsResult);
 
         echo  "Syllable result: ". $syllableResult->dashResult . "\n";   // parodo isskiemenuota zodi.
@@ -47,14 +73,4 @@ class Application
         $logger->info( "Syllable method took{$executionTime} seconds, syllabed word; {$givenWord}.");
     }
 
-    // public function getInputWord(){
-
-    // echo "Please Enter the word you want to syllable", "\n";
-    //     echo "Enter Word here: ";
-
-    //     $givenWord = trim(fgets(STDIN, 1024));
-
-    //     echo "The word you entered is: $givenWord". "\n";
-    // return $givenWord;
-    // }
 }

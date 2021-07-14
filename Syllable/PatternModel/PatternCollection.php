@@ -1,6 +1,7 @@
 <?php
+
 namespace Syllable\PatternModel;
-use  Syllable\PatternModel;
+//use  Syllable\PatternModel;
 
 class PatternCollection {
 

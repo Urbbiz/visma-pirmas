@@ -130,8 +130,8 @@ class Logger implements LoggerInterface
 
     public function log($level, $message, array $context = array())
     {
-        $d=mktime();
-        $time = "Time: ".date("Y-m-d h:i:sa", $d);
+        // $d=mktime();
+        $time = "Time: ".date("Y-m-d h:i:sa");
         $level = " Level:".$level." ";
 
         file_put_contents(DIR."/Var/Log/logFile.txt",$this->interpolate($time.$level.$message."\n", $context), FILE_APPEND | LOCK_EX);
